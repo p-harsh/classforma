@@ -7,10 +7,10 @@ import uuid from 'react-uuid';
 import { pdfData } from '../utils/constants';
 
 export default function Viewer({ id, status, setStatus }) {
-    const pdf_viewer_ref = React.useRef(null);
-    const [viewer_rect, setViewerRect] = useState({});
-    const [isDraggable, setIsDraggable] = useState(false)
-    const [coord, setCoord] = useState([0, 0, 0, 0])
+    const pdf_viewer_ref = React.useRef(null);// ref to the pdf viewer
+    const [viewer_rect, setViewerRect] = useState({});// pdf viewer bounding rectangle dimensions
+    const [isDraggable, setIsDraggable] = useState(false);
+    const [coord, setCoord] = useState([0, 0, 0, 0])// [x, y, width, height]
     const [numPages, setNumPages] = useState(null);
 
     function onDocumentLoadSuccess({ numPages: nextNumPages }) {
@@ -36,17 +36,18 @@ export default function Viewer({ id, status, setStatus }) {
     const handleMouseUp = (e) => {
         if (isDraggable) {
             var boxOldData = JSON.parse(localStorage.getItem(id));
-            if (boxOldData === null || boxOldData === undefined) {
+            if (boxOldData === null || boxOldData === undefined) {// if saving for the first time, both author and title not present
                 let boxData = { [status]: [coord] }
                 localStorage.setItem(id, JSON.stringify(boxData));
             }
             else {
-                if (boxOldData[status] === null || boxOldData[status] === undefined) {
-                    boxOldData[status] = [coord];
+                if (boxOldData[status] === null || boxOldData[status] === undefined) {// check if both are present or one of author and title is present in localStorage 
+                    boxOldData[status] = [coord];// when only one is present and other for which want to save is not present
                 }
-                else {
+                else {// when both are present
                     boxOldData[status] = [...boxOldData[status], coord];
                 }
+                // save in localStorage
                 localStorage.setItem(id, JSON.stringify(boxOldData));
             }
             setCoord([0, 0, 0, 0]);
@@ -57,6 +58,7 @@ export default function Viewer({ id, status, setStatus }) {
 
     const localStorageData = useMemo(() => {
         let boxData = JSON.parse(localStorage.getItem(id))
+        // initialise data with empty array to prevent undefined or null error
         if (boxData === undefined || boxData === null) {
             boxData = {'author': [], 'title': []}
         }
@@ -67,16 +69,14 @@ export default function Viewer({ id, status, setStatus }) {
             boxData['title'] = []
         }
         return boxData;
-    }, [status,id])
+    }, [status, id])
 
-    const idleDep = useMemo(() => status==='idle'?'auto':'none', [status]);
+    const idleDep = useMemo(() => status==='idle'?'auto':'none', [status]);// to be used while styling for userSelect
 
     return (
-        <div className="viewer"
-            style={{ margin: '0 12px', border: '2px solid grey' }}
-        >
+        <div className="viewer">
             <div className="pdf__container"
-                style={{ position: 'relative' }}
+                style={{ position: 'relative' }} // for the `div` which will contain the highlighted box
                 onMouseDown={handleMouseDown}
                 onMouseMoveCapture={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -97,7 +97,7 @@ export default function Viewer({ id, status, setStatus }) {
                     position: 'absolute',
                     width: `${coord[2]}px`,
                     height: `${coord[3]}px`,
-                    border: `${`2px solid ${status === 'title' ? 'red' : 'green'}`}`,
+                    border: `${!isDraggable?'0':'2'}px solid ${status==='title'?'red':'green'}`,
                     background: `${status === 'title' ? 'rgba(255, 0,0,0.3)' : 'rgba(0,255,0,0.3'}`,
                     top: `${coord[1]}px`,
                     left: `${coord[0]}px`

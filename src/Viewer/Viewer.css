@@ -7,3 +7,8 @@
 .box{
     position: absolute;
 }
+
+.viewer{
+    margin: '0 12px';
+    border: '2px solid grey';
+}
