@@ -1,14 +1,8 @@
 .pdf__container{
     margin: 0;
     padding: 0;
-    position: relative;
 }
-
-.box{
-    position: absolute;
-}
-
 .viewer{
-    margin: '0 12px';
-    border: '2px solid grey';
+    margin: 0 12px;
+    border: 2px solid grey;
 }

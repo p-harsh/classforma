@@ -5,6 +5,7 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import uuid from 'react-uuid';
 
 import { pdfData } from '../utils/constants';
+import './Viewer.css'
 
 export default function Viewer({ id, status, setStatus }) {
     const pdf_viewer_ref = React.useRef(null);// ref to the pdf viewer
