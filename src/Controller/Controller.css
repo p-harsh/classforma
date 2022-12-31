@@ -1,0 +1,46 @@
+.labels{
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr 1fr;
+    /* border: 1px solid rgba(0,0,0,0.65); */
+    border-radius: 8px;
+    padding: 4px;
+    margin-bottom: 8px;
+}
+.labels button{
+    padding: 8px 12px;
+    border: none;
+    margin: 2px;
+    cursor: pointer;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: large;
+    
+}
+.boxes{
+    /* border: 1px solid rgba(0,0,0,0.65); */
+    border-radius: 8px;
+    padding: 4px;
+    width: 100%;
+}
+
+.boxes-title i{
+    background-color: red;
+    color: white;
+    padding: 2px;
+}
+
+.boxes-author i{
+    background-color: green;
+    color: white;
+    padding: 2px;
+}
+
+.boxes h3, .labels h3{
+    border-bottom: 2px solid rgb(24, 116, 237);
+}
+
+.boxes-content{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+}
