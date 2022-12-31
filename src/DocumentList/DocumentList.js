@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 const DocumentList = () => {
   return (
     <>
+      <h3 style={{ borderBottom: '2px solid rgb(24, 116, 237)'}}>Documents</h3>
         <ul>
             {
                 pdfData.map((e, ind)=>{
