@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
 import uuid from 'react-uuid';
 
 import { pdfData } from '../utils/constants';
